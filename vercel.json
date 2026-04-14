@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/frontend/vite-project/index.html"
+    }
+  ]
+}
