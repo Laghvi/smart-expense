@@ -1,27 +1,63 @@
-import React from "react";
-import "./Sidebarpages.css";
+import "./Profile.css";
 
 function Profile() {
-  const name = localStorage.getItem("username");
-  const email = localStorage.getItem("email");
+
+  const username = localStorage.getItem("username") || "User";
+  const profilePic = localStorage.getItem("profilePic");
 
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
     window.location.href = "/login";
   };
 
   return (
-    <div className="page-container">
-      <div className="card">
-        <h2 className="page-title">My Profile</h2>
+    <div className="profile-container">
 
-        <p className="text"><strong>Name:</strong> {name}</p>
-        <p className="text"><strong>Email:</strong> {email || "Not available"}</p>
+      <div className="profile-card">
 
-        <button className="primary-btn" onClick={handleLogout}>
+        {/* ===== PROFILE HEADER ===== */}
+        <div className="profile-header">
+
+          {profilePic ? (
+            <img src={profilePic} className="profile-img" />
+          ) : (
+            <div className="profile-initial">
+              {username[0]?.toUpperCase()}
+            </div>
+          )}
+
+          <h2>{username}</h2>
+
+        </div>
+
+        {/* ===== STATS ===== */}
+        <div className="profile-stats">
+
+          <div className="stat-box">
+            <p>Total Transactions</p>
+            <h4>24</h4>
+          </div>
+
+          <div className="stat-box">
+            <p>Income Entries</p>
+            <h4>10</h4>
+          </div>
+
+          <div className="stat-box">
+            <p>Expense Entries</p>
+            <h4>14</h4>
+          </div>
+
+        </div>
+
+        {/* ===== LOGOUT ===== */}
+        <button className="logout-btn" onClick={handleLogout}>
           Logout
         </button>
+
       </div>
+
     </div>
   );
 }
